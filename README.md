@@ -63,38 +63,38 @@ A simple single-file unit test system for Lua with a somewhat rich set of assert
 
 ## Assertions Available
 
-_The `msg` parameter is always optional; some effort has been made to provide a somewhat helpful message if no message is provided._
+_The `msg` parameter is always optional; effort has been made to provide a helpful message if none is provided._
 
-* **`fail( msg )`** - instantly fail the test
-* **`assert( testCondition, msg )`** - fail if `testCondition` is either `nil` or `false`
-* **`assertEqual( actual, expected, msg )`** - fail if `actual ~= expected`
-* **`assertNotEqual( actual, expected, msg )`** - fail if `actual == expected`
-* **`assertTableEquals( actual, expected, msg )`** - recursively compare two tables and fail if they have any different keys or values
-* **`assertTrue( actual, msg )`** - fail if `actual ~= true`
-* **`assertFalse( actual, msg )`** - fail if `actual ~= false`
-* **`assertNil( actual, msg )`** - fail if `actual ~= nil`
-* **`assertNotNil( actual, msg )`** - fail if `actual == nil`
-* **`assertType( actual, expectedType, msg )`** - fail if `type(actual) ~= expectedType`  
+* <strong>`fail( msg )`</strong> - instantly fail the test
+* <strong>`assert( testCondition, msg )`</strong> - fail if `testCondition` is either `nil` or `false`
+* <strong>`assertEqual( actual, expected, msg )`</strong> - fail if `actual ~= expected`
+* <strong>`assertNotEqual( actual, expected, msg )`</strong> - fail if `actual == expected`
+* <strong>`assertTableEquals( actual, expected, msg )`</strong> - recursively compare two tables and fail if they have any different keys or values
+* <strong>`assertTrue( actual, msg )`</strong> - fail if `actual ~= true`
+* <strong>`assertFalse( actual, msg )`</strong> - fail if `actual ~= false`
+* <strong>`assertNil( actual, msg )`</strong> - fail if `actual ~= nil`
+* <strong>`assertNotNil( actual, msg )`</strong> - fail if `actual == nil`
+* <strong>`assertType( actual, expectedType, msg )`</strong> - fail if `type(actual) ~= expectedType`  
   _For example, `assertType(getResults(),"table","getResults() needs to return a table")`_
 
-* **`assertTableEmpty( actual, msg )`** - fail if `actual` is not a table, or if `actual` is a table with any keys (including a key with the value of `false`)
-* **`assertTableNotEmpty( actual, msg )`** - fail if `actual` is not a table, or if `actual` does not have any keys
-* **`assertInvokable( value, msg )`** - fail if `actual` is not a function and may not be invoked as one (via `meta.__call`)
-* **`assertErrors( invokable, ... )`** - call the function `invokable` passing along extra parameters, and fail if no errors are raised
-* **`assertDoesNotError( invokable, ... )`** - call the function `invokable` passing along extra parameters, and fail if any errors are raised
+* <strong>`assertTableEmpty( actual, msg )`</strong> - fail if `actual` is not a table, or if `actual` is a table with any keys (including a key with the value of `false`)
+* <strong>`assertTableNotEmpty( actual, msg )`</strong> - fail if `actual` is not a table, or if `actual` does not have any keys
+* <strong>`assertInvokable( value, msg )`</strong> - fail if `actual` is not a function and may not be invoked as one (via `meta.__call`)
+* <strong>`assertErrors( invokable, ... )`</strong> - call the function `invokable` passing along extra parameters, and fail if no errors are raised
+* <strong>`assertDoesNotError( invokable, ... )`</strong> - call the function `invokable` passing along extra parameters, and fail if any errors are raised
 
 ### Helper Functions
 
 _The following functions are made available to your tests, though they do not count as assertions and cannot cause a test failure on their own._
 
-* **`is_nil( value )`** - return true if `value` is `nil`
-* **`is_boolean( value )`** - return true if `value` is a boolean
-* **`is_number( value )`** - return true if `value` is a number
-* **`is_string( value )`** - return true if `value` is a string
-* **`is_table( value )`** - return true if `value` is a table
-* **`is_function( value )`** - return true if `value` is a function
-* **`is_thread( value )`** - return true if `value` is a thread
-* **`is_userdata( value )`** - return true if `value` is a userdata value
+* <strong>`is_nil( value )`</strong> - return true if `value` is `nil`
+* <strong>`is_boolean( value )`</strong> - return true if `value` is a boolean
+* <strong>`is_number( value )`</strong> - return true if `value` is a number
+* <strong>`is_string( value )`</strong> - return true if `value` is a string
+* <strong>`is_table( value )`</strong> - return true if `value` is a table
+* <strong>`is_function( value )`</strong> - return true if `value` is a function
+* <strong>`is_thread( value )`</strong> - return true if `value` is a thread
+* <strong>`is_userdata( value )`</strong> - return true if `value` is a userdata value
 
 _Note that while writing `assert(is_table(value))` looks nicer in code than `assertType(value,"table")`, the latter provides a better default error message to the user._
 
