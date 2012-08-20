@@ -74,9 +74,7 @@ _The `msg` parameter is always optional; effort has been made to provide a helpf
 * <strong>`assertFalse( actual, msg )`</strong> - fail if `actual ~= false`
 * <strong>`assertNil( actual, msg )`</strong> - fail if `actual ~= nil`
 * <strong>`assertNotNil( actual, msg )`</strong> - fail if `actual == nil`
-* <strong>`assertType( actual, expectedType, msg )`</strong> - fail if `type(actual) ~= expectedType`  
-  _For example, `assertType(getResults(),"table","getResults() needs to return a table")`_
-
+* <strong>`assertType( actual, expectedType, msg )`</strong> - fail if `type(actual) ~= expectedType`, e.g. `assertType(getResults(),"table","getResults() needs to return a table")`
 * <strong>`assertTableEmpty( actual, msg )`</strong> - fail if `actual` is not a table, or if `actual` is a table with any keys (including a key with the value of `false`)
 * <strong>`assertTableNotEmpty( actual, msg )`</strong> - fail if `actual` is not a table, or if `actual` does not have any keys
 * <strong>`assertInvokable( value, msg )`</strong> - fail if `actual` is not a function and may not be invoked as one (via `meta.__call`)
