@@ -1,4 +1,4 @@
-## Lunity v0.9.1 
+## Lunity v0.10.1 
 
 A simple single-file unit test system for Lua with a somewhat rich set of assertions and custom error messages. Features:
 
@@ -95,7 +95,7 @@ _The following functions are made available to your tests, though they do not co
 * <strong>`is_thread( value )`</strong> - return true if `value` is a thread
 * <strong>`is_userdata( value )`</strong> - return true if `value` is a userdata value
 
-_Note that while writing `assert(is_table(value))` looks nicer in code than `assertType(value,"table")`, the latter provides a better default error message to the user._
+*Note that while writing `assert(is_table(value))` looks nicer in code than `assertType(value,"table")`, the latter provides a better default error message to the user.*
 
 ## License
 
