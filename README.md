@@ -19,7 +19,7 @@ A simple single-file unit test system for Lua with a somewhat rich set of assert
      require 'test/lunity'
      module( 'TEST_THE_WORLD', lunity )
 
-     function test1_hello_world
+     function test1_hello_world()
        assert( true, "If true isn't true, we're in big trouble." )
      end
 
