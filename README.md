@@ -14,52 +14,51 @@ A simple single-file unit test system for Lua with a somewhat rich set of assert
 
 ## Simplest Usage
 
-<!-- language: lang-lua -->
+~~~ lua
+require 'test/lunity'
+module( 'TEST_THE_WORLD', lunity )
 
-     require 'test/lunity'
-     module( 'TEST_THE_WORLD', lunity )
-
-     function test1_hello_world()
-       assert( true, "If true isn't true, we're in big trouble." )
-     end
-
+function test1_hello_world()
+  assert( true, "If true isn't true, we're in big trouble." )
+end
+~~~
 
 ## Robust Usage
 
-<!-- language: lang-lua -->
-
-     require 'test/lunity'
-     module( 'TEST_RUNTIME', lunity )
+~~~ lua
+require 'test/lunity'
+module( 'TEST_RUNTIME', lunity )
+ 
+function setup()
+  -- code here will be run before each test
+end
      
-     function setup()
-       -- code here will be run before each test
-     end
+function teardown()
+  -- code here will be run after each test
+end
      
-     function teardown()
-       -- code here will be run after each test
-     end
+-- Tests to run must either start with or end with 'test'
+function test1_foo()
+  assertTrue( 42 == 40 + 2 )
+  assertFalse( 42 == 40 )
+  assertEqual( 42, 40 + 2 )
+  assertNotEqual( 42, 40, "These better not be the same!" )
+  assertTableEquals( { a=42 }, { ["a"]=6*7 } )
+  -- See below for more assertions available
+end
      
-     -- Tests to run must either start with or end with 'test'
-     function test1_foo()
-       assertTrue( 42 == 40 + 2 )
-       assertFalse( 42 == 40 )
-       assertEqual( 42, 40 + 2 )
-       assertNotEqual( 42, 40, "These better not be the same!" )
-       assertTableEquals( { a=42 }, { ["a"]=6*7 } )
-       -- See below for more assertions available
-     end
+function test2_bar()
+  -- Tests will be run in alphabetical order of the entire function name
+end
      
-     function test2_bar()
-       -- Tests will be run in alphabetical order of the entire function name
-     end
+function some_utility()
+  -- You can define helper functions for your tests to call with impunity
+end
      
-     function some_utility()
-       -- You can define helper functions for your tests to call with impunity
-     end
-     
-     runTests(  )
-     -- or runTests{ useANSI = false }
-     -- or runTests{ useHTML = true  }
+runTests()
+-- or runTests{ useANSI = false }
+-- or runTests{ useHTML = true  }
+~~~
 
 ## Assertions Available
 
