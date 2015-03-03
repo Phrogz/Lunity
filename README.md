@@ -77,7 +77,7 @@ _The `msg` parameter is always optional; effort has been made to provide a helpf
 * <strong>`assertTableEmpty( actual, msg )`</strong> - fail if `actual` is not a table, or if `actual` is a table with any keys (including a key with the value of `false`)
 * <strong>`assertTableNotEmpty( actual, msg )`</strong> - fail if `actual` is not a table, or if `actual` does not have any keys
 * <strong>`assertSameKeys( table1, table2, msg )`</strong> - fail if either table has a key not present in the other (good for set comparisons)
-* <strong>`assertInvokable( value, msg )`</strong> - fail if `actual` is not a function and may not be invoked as one (via `meta.__call`)
+* <strong>`assertInvokable( value, msg )`</strong> - fail if `actual` is not a function, or may not be invoked as one (via `meta.__call`)
 * <strong>`assertErrors( invokable, ... )`</strong> - call the function `invokable` passing along extra parameters, and fail if no errors are raised
 * <strong>`assertDoesNotError( invokable, ... )`</strong> - call the function `invokable` passing along extra parameters, and fail if any errors are raised
 
