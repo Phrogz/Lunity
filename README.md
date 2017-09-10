@@ -2,12 +2,11 @@
 
 A simple single-file unit test system for Lua with a somewhat rich set of assertions and custom error messages. Features:
 
-* Lua 5.1 module
+* Lua 5.3 support
 * Framework is a single file.
 * Define utility functions separate from and available to test functions.
 * Control the order that tests are run (by renaming functions).
 * Can output ANSI (for conforming terminals) or HTML (for TextMate or e).
-* Sensible (to me) injection of functions while preserving global scope.
 * Rich set of assertions and custom error messages.  
   (Including assertion for comparing tables of values.)
 
@@ -15,30 +14,33 @@ A simple single-file unit test system for Lua with a somewhat rich set of assert
 ## Simplest Usage
 
 ~~~ lua
-require 'test/lunity'
-module( 'TEST_THE_WORLD', lunity )
+local lunity = require("test/lunity")
+local l = lunity("TEST_RUNTIME")
 
-function test1_hello_world()
+function l.test1_hello_world()
   assert( true, "If true isn't true, we're in big trouble." )
 end
+
+l.runTests()
 ~~~
 
 ## Robust Usage
 
 ~~~ lua
-require 'test/lunity'
-module( 'TEST_RUNTIME', lunity )
- 
-function setup()
+local lunity = require("test/lunity")
+local l = lunity("TEST_RUNTIME")
+
+
+function l.setup()
   -- code here will be run before each test
 end
      
-function teardown()
+function l.teardown()
   -- code here will be run after each test
 end
      
 -- Tests to run must either start with or end with 'test'
-function test1_foo()
+function l.test1_foo()
   assertTrue( 42 == 40 + 2 )
   assertFalse( 42 == 40 )
   assertEqual( 42, 40 + 2 )
@@ -47,17 +49,17 @@ function test1_foo()
   -- See below for more assertions available
 end
      
-function test2_bar()
+function l.test2_bar()
   -- Tests will be run in alphabetical order of the entire function name
 end
      
-function some_utility()
+function l.some_utility()
   -- You can define helper functions for your tests to call with impunity
 end
-     
-runTests()
--- or runTests{ useANSI = false }
--- or runTests{ useHTML = true  }
+
+l.runTests()
+-- or l.runTests({ useANSI = false })
+-- or l.runTests({ useHTML = true  })
 ~~~
 
 ## Assertions Available
