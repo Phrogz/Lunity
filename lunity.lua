@@ -18,7 +18,7 @@ setmetatable( lunity, {
 		setmetatable( testSuite, {
 			__index = function( testSuite, value )
 				if value == 'runTests' then
-					return function( options ) lunity.__runAllTests( testSuite, options ) end
+					return function( options ) return lunity.__runAllTests( testSuite, options ) end
 				elseif lunity[value] then
 					return lunity[value]
 				else
@@ -371,5 +371,5 @@ function __runAllTests( testSuite, options )
 		print( "" )
 	end
 	io.stdout:flush()
-
+	return theSuccessCount == #theTestNames
 end
