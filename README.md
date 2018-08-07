@@ -121,8 +121,3 @@ Modification, reuse and redistribution permitted provided the following
 attribution and copyright line is included:
 
 Copyright (c) 2012-2018 by [Gavin Kistner](mailto:!@phrogz.net) (Phrogz)
-
-
-
-
-

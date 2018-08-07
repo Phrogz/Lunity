@@ -1,5 +1,5 @@
 --[=========================================================================[
-   Lunity v0.11 by Gavin Kistner
+   Lunity v0.11.1 by Gavin Kistner
    See http://github.com/Phrogz/Lunity for usage documentation.
    Licensed under Creative Commons Attribution 3.0 United States License.
    See http://creativecommons.org/licenses/by/3.0/us/ for details.
@@ -335,7 +335,8 @@ local function run(self, opts)
 		io.stdout:flush()
 		if self.after then self.after(scratchpad) end
 	end
-	local stopTime = os.clock()
+	local elapsed = os.clock() - startTime
+
 	if useHTML then
 		print("</pre>")
 	else
@@ -350,10 +351,11 @@ local function run(self, opts)
 
 	if useHTML then print("<br>") end
 
-	print(string.format("%d total successful assertion%s (%.1f assertions/second)",
+	print(string.format("%d total successful assertion%s in ~%.0fms (%.0f assertions/second)",
 		assertsPassed,
 		assertsPassed == 1 and "" or "s",
-		assertsAttempted / (stopTime - startTime)
+		elapsed*1000,
+		assertsAttempted / elapsed
 	))
 
 	if not useHTML then print("") end
