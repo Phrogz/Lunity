@@ -1,5 +1,5 @@
 --[=========================================================================[
-   Lunity v0.11.1 by Gavin Kistner
+   Lunity v0.11.2 by Gavin Kistner
    See http://github.com/Phrogz/Lunity for usage documentation.
    Licensed under Creative Commons Attribution 3.0 United States License.
    See http://creativecommons.org/licenses/by/3.0/us/ for details.
@@ -92,7 +92,7 @@ function lunity.assertTableEquals(actual, expected, msg, keyPath)
 				end
 				error(msg, 1 + #keyPath)
 			elseif expectedValue ~= actualValue then
-				assertTableEquals(actualValue, expectedValue, msg, keyPath)
+				lunity.assertTableEquals(actualValue, expectedValue, msg, keyPath)
 			end
 		else
 			if actualValue ~= expectedValue then

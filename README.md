@@ -1,4 +1,4 @@
-## Lunity v0.11
+## Lunity v0.11.2
 
 A simple single-file unit test system for Lua with a somewhat rich set of assertions and custom error messages. Features:
 
