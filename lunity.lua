@@ -1,5 +1,5 @@
 --[=========================================================================[
-   Lunity v0.11.2 by Gavin Kistner
+   Lunity v0.11.3 by Gavin Kistner
    See http://github.com/Phrogz/Lunity for usage documentation.
    Licensed under Creative Commons Attribution 3.0 United States License.
    See http://creativecommons.org/licenses/by/3.0/us/ for details.
@@ -250,7 +250,7 @@ function lunity.assertInvokable(value, msg)
 end
 
 function lunity.assertErrors(invokable, ...)
-	assertInvokable(invokable)
+	lunity.assertInvokable(invokable)
 	if pcall(invokable,...) then
 		local msg = string.format("assertErrors() failed: %s did not raise an error",
 			tostring(invokable)
@@ -261,7 +261,7 @@ function lunity.assertErrors(invokable, ...)
 end
 
 function lunity.assertDoesNotError(invokable, ...)
-	assertInvokable(invokable)
+	lunity.assertInvokable(invokable)
 	if not pcall(invokable,...) then
 		local msg = string.format("assertDoesNotError() failed: %s raised an error",
 			tostring(invokable)
