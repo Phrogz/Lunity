@@ -1,15 +1,18 @@
 --[=========================================================================[
-   Lunity v0.11.3 by Gavin Kistner
+   Lunity v0.12 by Gavin Kistner
    See http://github.com/Phrogz/Lunity for usage documentation.
    Licensed under Creative Commons Attribution 3.0 United States License.
    See http://creativecommons.org/licenses/by/3.0/us/ for details.
 --]=========================================================================]
 
+-- Cache these so we can silence the real ones during a run
+local print,write = print,io.write
+
 -- FIXME: this will fail if two test suites are running interleaved
 local assertsPassed, assertsAttempted
 local function assertionSucceeded()
 	assertsPassed = assertsPassed + 1
-	io.write('.')
+	write('.')
 	return true
 end
 
@@ -282,6 +285,11 @@ function lunity.is_userdata(value) return type(value)=='userdata' end
 
 local function run(self, opts)
 	if not opts then opts = {} end
+	if opts.quiet then
+		_G.print = function() end
+		io.write = function() end
+	end
+
 	assertsPassed = 0
 	assertsAttempted = 0
 
@@ -314,7 +322,7 @@ local function run(self, opts)
 	local passed = 0
 	for _,name in ipairs(testnames) do
 		local scratchpad = {}
-		io.write(name..": ")
+		write(name..": ")
 		if self.before then self.before(scratchpad) end
 		local successFlag, errorMessage = pcall(self[name], scratchpad)
 		if successFlag then
@@ -361,6 +369,10 @@ local function run(self, opts)
 	if not useHTML then print("") end
 	io.stdout:flush()
 
+	if opts.quiet then
+		_G.print = print
+		io.write = write
+	end
 end
 
 return function(name)

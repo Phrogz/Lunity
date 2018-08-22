@@ -1,4 +1,4 @@
-## Lunity v0.11.2
+## Lunity v0.12
 
 A simple single-file unit test system for Lua with a somewhat rich set of assertions and custom error messages. Features:
 
@@ -64,9 +64,11 @@ function test:bar()
   assertType(some_utility(), "string")
 end
 
-test()
--- or test{ useANSI = false }
--- or test{ useHTML = true  }
+test{
+  useANSI=false, -- turn off ANSI codes (colors/bold) in the output
+  useHTML=true,  -- turn on  HTML markup in the output
+  quiet=true,    -- silence print() and io.write() other than Lua during the tests
+}
 ```
 
 
@@ -106,6 +108,8 @@ _The following functions are made available to your tests, though they do not co
 
 *Note that while writing `assert(is_table(value))` looks nicer in code than `assertType(value, 'table')`, the latter provides a better default error message to the user.*
 
+
+##
 
 ## License
 
