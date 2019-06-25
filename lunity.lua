@@ -190,7 +190,7 @@ function lunity.assertTableEmpty(actual, msg)
 	assertsAttempted = assertsAttempted + 1
 	if type(actual) ~= "table" then
 		msg = string.format("assertTableEmpty() failed: expected a table, but got a %s",
-			type(table)
+			type(actual)
 		)
 		error(msg, 2)
 	else
