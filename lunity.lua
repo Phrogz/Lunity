@@ -1,5 +1,5 @@
 --[=========================================================================[
-   Lunity v0.12 by Gavin Kistner
+   Lunity v0.13 by Gavin Kistner
    See http://github.com/Phrogz/Lunity for usage documentation.
    Licensed under Creative Commons Attribution 3.0 United States License.
    See http://creativecommons.org/licenses/by/3.0/us/ for details.
@@ -373,6 +373,8 @@ local function run(self, opts)
 		_G.print = print
 		io.write = write
 	end
+
+	return passed==#testnames
 end
 
 return function(name)

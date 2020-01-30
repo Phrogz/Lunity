@@ -64,11 +64,13 @@ function test:bar()
   assertType(some_utility(), "string")
 end
 
-test{
+local allPassed = test{
   useANSI=false, -- turn off ANSI codes (colors/bold) in the output
   useHTML=true,  -- turn on  HTML markup in the output
   quiet=true,    -- silence print() and io.write() other than Lua during the tests
 }
+
+if not allPassed then os.exit(1) end
 ```
 
 
@@ -124,4 +126,4 @@ http://creativecommons.org/licenses/by/3.0/us/ or send a letter to
 Modification, reuse and redistribution permitted provided the following
 attribution and copyright line is included:
 
-Copyright (c) 2012-2018 by [Gavin Kistner](mailto:!@phrogz.net) (Phrogz)
+Copyright (c) 2012-2020 by [Gavin Kistner](mailto:!@phrogz.net) (Phrogz)
