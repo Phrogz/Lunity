@@ -323,7 +323,14 @@ local function run(self, opts)
 	local suiteName = getmetatable(self).name
 
 	if useHTML then
-		print("<h2 style='background:#000; color:#fff; margin:1em 0 0 0; padding:0.1em 0.4em; font-size:120%'>"..suiteName.."</h2><pre style='margin:0; padding:0.2em 1em; background:#ffe; border:1px solid #eed; overflow:auto'>")
+		print(string.format([[<!DOCTYPE html>
+<head><style type="text/css">
+h2 {background:#000; color:#fff; margin:1em 0 0 0; padding:0.1em 0.4em; font-size:1.5vw}
+pre {margin:0; padding:0.2em 1em; background:#ffe; border:1px solid #eed; overflow:auto; font-size:1.5vw}
+b, span {color:red}
+p {font-size:1.5vw}
+</style></head>
+<h2>%s</h2><pre>]], suiteName))
 	else
 		print(string.rep('=',78))
 		print(suiteName)
@@ -345,21 +352,20 @@ local function run(self, opts)
 	local passed = 0
 	for _,name in ipairs(testnames) do
 		local scratchpad = {}
-		write(name..": ")
 		if self.before then self.before(scratchpad) end
 		local successFlag, errorMessage = pcall(self[name], scratchpad)
 		if successFlag then
-			print("pass")
+			print(name..": pass")
 			passed = passed + 1
 		else
 			if useANSI then
-				print("\27[31m\27[1mFAIL!\27[0m")
+				print("\27[31m\27[1m"..name..": FAIL!\27[0m")
 				print("\27[31m"..errorMessage.."\27[0m")
 			elseif useHTML then
-				print("<b style='color:red'>FAIL!</b>")
-				print("<span style='color:red'>"..errorMessage.."</span>")
+				print("<b>"..name..": FAIL!</b>")
+				print("<span>"..errorMessage.."</span>")
 			else
-				print("FAIL!")
+				print(name..": FAIL!")
 				print(errorMessage)
 			end
 		end
@@ -369,7 +375,7 @@ local function run(self, opts)
 	local elapsed = os.clock() - startTime
 
 	if useHTML then
-		print("</pre>")
+		print("</pre><p>")
 	else
 		print(string.rep('-', 78))
 	end
@@ -380,7 +386,7 @@ local function run(self, opts)
 		100 * passed / #testnames
 	))
 
-	if useHTML then print("<br>") end
+	if useHTML then print("<br><p>") end
 
 	print(string.format("%d total successful assertion%s in ~%.0fms (%.0f assertions/second)",
 		assertsPassed,
