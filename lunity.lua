@@ -293,9 +293,32 @@ local function run(self, opts)
 	assertsPassed = 0
 	assertsAttempted = 0
 
-	local useANSI,useHTML = true, false
+	local useANSI, useHTML, outFile = true, false, io
 	if opts.useHTML ~= nil then useHTML=opts.useHTML end
 	if not useHTML and opts.useANSI ~= nil then useANSI=opts.useANSI end
+
+	if opts.outFile ~= nil then
+		local filepath = opts.outFile
+		local exists = function(file) -- file exists -> true, file not exists -> false
+			local f = io.open(file, "r")
+			return (f ~= nil and f:close())
+		end
+		-- append date_time to file if file exists
+		if exists(filepath) then
+			-- split path and file and suffix
+			local base, file, dotSuffix = string.match(filepath, [[^(.-)([^\\/]-%.?)([.].*)$]])
+			-- join path, file, date and suffix (cplusplus.com/reference/ctime/strftime/)
+			local date = string.gsub(os.date("_%F_%X"), '[:]', '-')
+			filepath = string.format('%s%s%s%s', base, file, date, dotSuffix)
+		end
+		-- open file in write-mode
+		local outFile = io.open(filepath, 'w')
+		-- add write function in print
+		print = function(...)
+			_G.print(...) -- add new line to write
+			outFile:write(string.format([[%s%s]], ..., '\n'))
+		end
+	end
 
 	local suiteName = getmetatable(self).name
 
@@ -373,7 +396,12 @@ local function run(self, opts)
 		_G.print = print
 		io.write = write
 	end
-
+	
+	if io.type(outFile) == "file" then
+		_G.print = print  -- reset print function
+		outFile:close()   -- close outFile if opened
+	end
+	
 	return passed==#testnames
 end
 
